@@ -1,0 +1,18 @@
+Cấu hình mạng: tất cả dùng mask 255.255.255.0.
+Thiết bị / cổng	IP	Gateway
+Home Gateway — LAN/Wi-Fi	192.168.25.1	—
+Home Gateway — Internet	192.168.10.2	192.168.10.1
+Router1 — nối Home Gateway	192.168.10.1	—
+Router1 — nối Switch	192.168.20.1	—
+Server0	192.168.20.2	192.168.20.1
+IoT, laptop, điện thoại	DHCP: 192.168.25.x	Tự nhận
+
+
+- Nối dây: Home Gateway cổng Internet → Router1 → Switch2 → Server0.
+- Router1: đặt IP hai cổng như bảng, bật no shutdown.
+- Switch2: giữ mặc định, không cần IP.
+- Home Gateway: bật DHCP; Wi-Fi tên NHA_IOT, WPA2-PSK, mật khẩu iot123456.
+- Server0: bật Services → IoT → On và HTTP → On; tạo tài khoản trên http://192.168.20.2.
+- IoT, laptop, điện thoại: bắt Wi-Fi NHA_IOT, chọn DHCP.
+- Riêng IoT: chọn Remote Server 192.168.20.2, nhập tài khoản server → Connect.
+- Điều khiển: laptop/điện thoại mở http://192.168.20.2, đăng nhập.
