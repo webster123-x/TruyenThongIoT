@@ -1,0 +1,40 @@
+
+mqtt:
+
+  # BAI 12.1 
+  sensor:
+    - name: "Lab1 10124180 Temperature"
+      unique_id: "lab1_10124180_temperature"
+      state_topic: "iot/lab1/10124180/sensor"
+      unit_of_measurement: "°C"
+      device_class: temperature
+      value_template: "{{ value_json.temp }}"
+
+    - name: "Lab1 10124180 Humidity"
+      unique_id: "lab1_10124180_humidity"
+      state_topic: "iot/lab1/10124180/sensor"
+      unit_of_measurement: "%"
+      device_class: humidity
+      value_template: "{{ value_json.hum }}"
+  # BAI 12.2 - DIEU KHIEN LED Qua MQTT
+  switch:
+    - name: "Lab2 10124180 LED"
+      unique_id: "lab2_10124180_led"
+      command_topic: "iot/lab2/10124180/cmd"
+      state_topic: "iot/lab2/10124180/state"
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+
+  # BAI 12.3 - MQTT RETAIN
+     - name: "Lab3 10124180 LED Retain"
+      unique_id: "lab3_10124180_led"
+      command_topic: "iot/lab3/10124180/cmd"
+      state_topic: "iot/lab3/10124180/state"
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+      availability_topic: "iot/lab3/10124180/lwt"
+      payload_available: "ONLINE"
+      payload_not_available: "OFFLINE"
+
