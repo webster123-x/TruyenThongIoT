@@ -1,0 +1,53 @@
+
+esphome:
+  name: khoi
+  friendly_name: khoi
+
+esp32:
+  variant: esp32s3
+  flash_size: 8MB
+  framework:
+    type: esp-idf
+
+logger:
+
+api:
+  encryption:
+    key: FNi+a63uXFwW0yj/8wFX0WjTQX1tT386GdgeMk9CYIQ=
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: "Redmi Note 12 Turbo"
+  password: Khoi1234567890
+  ap:
+    ssid: khoi Fallback Hotspot
+    password: Khoi12345
+
+captive_portal:
+
+web_server:
+  port: 80
+
+
+light:
+  - platform: esp32_rmt_led_strip
+    name: "mt"
+    id: status_led
+    pin: GPIO48
+    num_leds: 1
+    chipset: ws2812
+    rgb_order: GRB
+    effects:
+      - strobe:
+          name: "Blink Fast"
+          colors:
+            - state: true
+              brightness: 100%
+              red: 100%
+              green: 0%
+              blue: 0%
+              duration: 500ms
+            - state: false
+              duration: 500ms

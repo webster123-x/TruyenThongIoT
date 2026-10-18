@@ -1,0 +1,78 @@
+esphome:
+  name: esp32-nhietdo
+  friendly_name: ESP32 Nhiet Do
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+logger:
+
+# Kết nối với Home Assistant
+api:
+
+# Cho phép cập nhật qua Wi-Fi
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: "Hanh1982"
+  password: hiep1982
+
+  ap:
+    ssid: "ESP32 Du Phong"
+    password: "12345678"
+
+captive_portal:
+
+# Xem giá trị bằng trình duyệt tại địa chỉ IP của ESP
+web_server:
+  port: 80
+
+sensor:
+  - platform: template
+    name: "Nhiet do "
+    id: nhiet_do_ao
+    device_class: temperature
+    state_class: measurement
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    update_interval: 5s
+    lambda: |-
+      static float temperature = 28.0f;
+      static float step = 0.2f;
+
+      temperature += step;
+      if (temperature >= 32.0f) {
+        temperature = 32.0f;
+        step = -0.2f;
+      } else if (temperature <= 26.0f) {
+        temperature = 26.0f;
+        step = 0.2f;
+      }
+
+      return temperature;
+
+  - platform: template
+    name: "Do am "
+    id: do_am_ao
+    device_class: humidity
+    state_class: measurement
+    unit_of_measurement: "%"
+    accuracy_decimals: 1
+    update_interval: 5s
+    lambda: |-
+      static float humidity = 65.0f;
+      static float step = 0.5f;
+
+      humidity += step;
+      if (humidity >= 80.0f) {
+        humidity = 80.0f;
+        step = -0.5f;
+      } else if (humidity <= 55.0f) {
+        humidity = 55.0f;
+        step = 0.5f;
+      }
+
+      return humidity;
